@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!--suppress HtmlFormInputWithoutLabel -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CORS test</title>
+    <style>
+        body, button, select, option {
+            font-size: 24px;
+        }
+    </style>
+    <script>
+        let getHeaders = (method, withHeaders) => {
+            let result = {
+                "Accept": "text/plain"
+            };
+            if (method === "POST") {
+                result["Content-Type"] = "text/plain";
+            }
+            if (withHeaders) {
+                result.Authorization = "Bearer dummy";
+            }
+            return result;
+        };
+
+        let doRequest = (element) => {
+            let method = document.querySelector("#method").value
+            let url = document.querySelector("#endpoint").value
+            let authorization = document.querySelector("#authorization").value === "yes"
+            const headers = getHeaders(method, authorization);
+            let init = {method, headers};
+            if (method === "POST") {
+                init.body = "test";
+            }
+            fetch(`http://localhost:8080${url}`, init)
+                .then((response) => {
+                    if (!response.ok) {
+                        document.querySelector(element).textContent = `${response.status} ${response.statusText}`;
+                    } else {
+                        response.text()
+                            .then((text) => {
+                                document.querySelector(element).textContent = text;
+                            });
+                    }
+                })
+                .catch((error) => {
+                    document.querySelector(element).textContent = error;
+                });
+        };
+    </script>
+</head>
+<body>
+<select id="method">
+    <option value="GET">GET</option>
+    <option value="POST">POST</option>
+</select>
+<select id="endpoint">
+    <option value="/simple">no CORS</option>
+    <option value="/strict">CORS</option>
+</select>
+<select id="authorization">
+    <option value="no">no authorization</option>
+    <option value="yes">with authorization</option>
+</select>
+<button onclick="doRequest('#simple')">Do request</button>
+<div id="simple"></div>
+</body>
+</html>

@@ -6,7 +6,10 @@ val junit_version: String by project
 val test_containers_version: String by project
 
 plugins {
+    id("org.springframework.boot")
+    id("io.spring.dependency-management")
     kotlin("jvm")
+    kotlin("plugin.spring")
     id("com.github.ben-manes.versions")
 }
 
@@ -17,10 +20,12 @@ repositories {
     mavenCentral()
 }
 
-tasks.test {
-    useJUnitPlatform()
+dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-web")
 }
 
-tasks.withType<KotlinCompile>() {
-    kotlinOptions.jvmTarget = "11"
+tasks {
+    withType<KotlinCompile> {
+        kotlinOptions.jvmTarget = "11"
+    }
 }
