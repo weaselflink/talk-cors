@@ -10,15 +10,18 @@
         }
     </style>
     <script>
-        let getHeaders = (method, withHeaders) => {
+        let getHeaders = (method, headerType) => {
             let result = {
                 "Accept": "text/plain"
             };
             if (method === "POST") {
                 result["Content-Type"] = "text/plain";
             }
-            if (withHeaders) {
+            if (headerType === "allowed") {
                 result.Authorization = "Bearer dummy";
+            }
+            if (headerType === "forbidden") {
+                result.Dummy = "I am forbidden";
             }
             return result;
         };
@@ -26,8 +29,8 @@
         let doRequest = (element) => {
             let method = document.querySelector("#method").value
             let url = document.querySelector("#endpoint").value
-            let authorization = document.querySelector("#authorization").value === "yes"
-            const headers = getHeaders(method, authorization);
+            let headerType = document.querySelector("#headerType").value
+            const headers = getHeaders(method, headerType);
             let init = {method, headers};
             if (method === "POST") {
                 init.body = "test";
@@ -58,11 +61,12 @@
     <option value="/simple">no CORS</option>
     <option value="/strict">CORS</option>
 </select>
-<select id="authorization">
-    <option value="no">no authorization</option>
-    <option value="yes">with authorization</option>
+<select id="headerType">
+    <option value="none">no headers</option>
+    <option value="allowed">allowed headers</option>
+    <option value="forbidden">forbidden headers</option>
 </select>
-<button onclick="doRequest('#simple')">Do request</button>
-<div id="simple"></div>
+<button onclick="doRequest('#result')">Do request</button>
+<div id="result"></div>
 </body>
 </html>
