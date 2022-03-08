@@ -1,92 +1,93 @@
 <!doctype html>
 <!--suppress HtmlRequiredAltAttribute -->
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>Talk - CORS</title>
+    <title>Talk - CORS</title>
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/black.css">
 
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-		<style>
-			@font-face {
-				font-family: Coda;
-				src: url(./fonts/Coda-Heavy.ttf);
-			}
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+    <style>
+        @font-face {
+            font-family: Coda;
+            src: url(./fonts/Coda-Heavy.ttf);
+        }
 
-			pre {
-				tab-size: 4;
-				-moz-tab-size: 4;
-			}
+        pre {
+            tab-size: 4;
+            -moz-tab-size: 4;
+        }
 
-			:not(pre) > code {
-				font-size: smaller;
-				font-weight: bold;
-				color: cadetblue;
-			}
+        :not(pre) > code {
+            font-size: smaller;
+            font-weight: bold;
+            color: cadetblue;
+        }
 
-			.reveal h2, .reveal h3, .author {
-				-webkit-text-stroke: 2px black;
-				font-family: Coda, serif;
-			}
+        .reveal h2, .reveal h3, .author {
+            -webkit-text-stroke: 2px black;
+            font-family: Coda, serif;
+        }
 
-			.reveal h2 {
-				font-size: 1.8em;
-			}
+        .reveal h2 {
+            font-size: 1.8em;
+        }
 
-			.reveal h3 {
-				font-size: 1.4em;
-			}
+        .reveal h3 {
+            font-size: 1.4em;
+        }
 
-			.reveal p {
-				font-size: 1.3em;
-			}
-		</style>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section data-background="images/tracks_00001-861x1314.jpg" data-background-opacity="0.6">
-					<h2>CORS Primer</h2>
-					<p class="author">Stefan Bissell</p>
-				</section>
-				<section>
-					<p>Ever seen this?</p>
-					<img style="width: 200%" src="images/cors-browser-error.png">
-				</section>
-				<section>
-					<p>Cross-Origin Resource Sharing (CORS)<br> is a <b>feature</b> of Javascript.</p>
-					<p>Simply because it can make<br> HTTP requests to <b>any URL</b>.</p>
-				</section>
-				<section>
-					<p>An HTTP request becomes CORS<br> if the target URL is different from the<br> page which loaded the script.</p>
-				</section>
-				<section>
-					<img src="images/cors-1.svg"/>
-				</section>
-				<section>
-					<p>Some use cases:</p>
-					<ul>
-						<li>images from CDN</li>
-						<li>separate frontend/backend</li>
-						<li>calling external APIs</li>
-					</ul>
-				</section>
-			</div>
-		</div>
+        .reveal p {
+            font-size: 1.3em;
+        }
+    </style>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section data-background="images/tracks_00001-861x1314.jpg" data-background-opacity="0.6">
+            <h2>CORS Primer</h2>
+            <p class="author">Stefan Bissell</p>
+        </section>
+        <section>
+            <p>Ever seen this?</p>
+            <img style="width: 200%" src="images/cors-browser-error.png">
+        </section>
+        <section>
+            <p>Cross-Origin Resource Sharing (CORS)<br> is a <b>feature</b> of Javascript.</p>
+            <p>Simply because it can make<br> HTTP requests to <b>any URL</b>.</p>
+        </section>
+        <section>
+            <p>An HTTP request becomes CORS<br> if the target URL is different from the<br> page which loaded the
+                script.</p>
+        </section>
+        <section>
+            <img src="images/cors-1.svg"/>
+        </section>
+        <section>
+            <p>Some use cases:</p>
+            <ul>
+                <li>images from CDN</li>
+                <li>separate frontend/backend</li>
+                <li>calling external APIs</li>
+            </ul>
+        </section>
+    </div>
+</div>
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			Reveal.initialize({
-				hash: true,
-				plugins: [ RevealMarkdown, RevealHighlight ]
-			});
-		</script>
-	</body>
+<script src="dist/reveal.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script>
+    Reveal.initialize({
+        hash: true,
+        plugins: [RevealMarkdown, RevealHighlight]
+    });
+</script>
+</body>
 </html>
