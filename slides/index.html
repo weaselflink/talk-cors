@@ -41,6 +41,10 @@
 			.reveal h3 {
 				font-size: 1.4em;
 			}
+
+			.reveal p {
+				font-size: 1.3em;
+			}
 		</style>
 	</head>
 	<body>
@@ -51,15 +55,26 @@
 					<p class="author">Stefan Bissell</p>
 				</section>
 				<section>
-					<p>Recently we see this a lot</p>
+					<p>Ever seen this?</p>
 					<img style="width: 200%" src="images/cors-browser-error.png">
 				</section>
-				<section data-auto-animate>
-					<p>Cross-Origin Resource Sharing (CORS)<br> is a security feature<br> implemented in browsers.</p>
+				<section>
+					<p>Cross-Origin Resource Sharing (CORS)<br> is a <b>feature</b> of Javascript.</p>
+					<p>Simply because it can make<br> HTTP requests to <b>any URL</b>.</p>
 				</section>
-				<section data-auto-animate>
-					<p>Cross-Origin Resource Sharing (CORS)<br> is a security feature<br> implemented in browsers.</p>
-					<p>Security? Protecting against what?</p>
+				<section>
+					<p>An HTTP request becomes CORS<br> if the target URL is different from the<br> page which loaded the script.</p>
+				</section>
+				<section>
+					<img src="images/cors-1.svg"/>
+				</section>
+				<section>
+					<p>Some use cases:</p>
+					<ul>
+						<li>images from CDN</li>
+						<li>separate frontend/backend</li>
+						<li>calling external APIs</li>
+					</ul>
 				</section>
 			</div>
 		</div>
