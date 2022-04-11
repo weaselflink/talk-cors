@@ -14,10 +14,12 @@ class CorsConfig : WebMvcConfigurer {
             .allowedMethods("*")
             .allowedHeaders("*")
             .exposedHeaders("*")
+            .allowCredentials(false)
         registry
             .addMapping("/strict")
             .allowedOrigins("http://localhost:8080")
             .allowedMethods("GET", "POST")
             .allowedHeaders("Authorization")
+            .allowCredentials(true)
     }
 }

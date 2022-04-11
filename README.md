@@ -1,3 +1,11 @@
+# Quick primer: CORS requests
+
+Recently most browsers have gotten stricter when handling requests from inside Javascript
+that target domains different from the script's origin (the page executing the script).
+
+This repository contains slides for a quick talk titled "CORS primer" as well as an
+example how to configure CORS inside a SpringBoot backend.
+
 ## Thanks to
 
 ### Images in slide
