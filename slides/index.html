@@ -55,6 +55,11 @@
             <p class="author">Stefan Bissell</p>
         </section>
         <section>
+            <p>Examples and slides:</p>
+            <p class="github">https://github.com/weaselflink/talk-cors</p>
+            <img alt="qr-code" src="images/github-qr.png"/>
+        </section>
+        <section>
             <h4>Ever seen this?</h4>
             <img style="width: 200%" src="images/cors-browser-error.png">
         </section>
@@ -181,6 +186,56 @@
                 <li>Let preflighted requests reach the servers</li>
                 <li>Handle CORS via some server framework<br> (e.g. Spring Security)</li>
             </ul>
+        </section>
+        <section data-background="images/pexels-susanne-jutzeler-2099737.jpg" data-background-opacity="0.6">
+            <h3>SpringBoot example</h3>
+        </section>
+        <section>
+            <h4>Precondition</h4>
+            <p>The preflighted requests are <code>OPTIONS</code> requests without
+                authentication!</p>
+            <p>The backend infrastructure must let these requests pass!</p>
+        </section>
+        <section>
+            <h4>Basic config</h4>
+            <pre><code data-trim>
+                @Configuration
+                class CorsConfig : WebMvcConfigurer {
+
+                    override fun addCorsMappings(registry: CorsRegistry) {
+                        // configure here
+                    }
+                }
+            </code></pre>
+            <p style="font-size: smaller">(CORS is enabled is SpringBoot by default)</p>
+        </section>
+        <section>
+            <h4>Non-secure endpoints</h4>
+            <pre><code data-trim>
+                registry
+                    .addMapping("/non-secure")
+                    .allowedOrigins("*") // only allowed
+                    .allowedMethods("*")
+                    .allowedHeaders("*")
+                    .exposedHeaders("*")
+                    .allowCredentials(false) // with this
+            </code></pre>
+        </section>
+        <section>
+            <h4>Secure endpoints</h4>
+            <pre><code data-trim>
+                registry
+                    .addMapping("/secure")
+                    .allowedOrigins("https://www.secure-pa.ge") // not "*"
+                    .allowedMethods("POST")
+                    .allowedHeaders("Authorization")
+                    .allowCredentials(true)
+            </code></pre>
+        </section>
+        <section>
+            <p>Examples and slides:</p>
+            <p class="github">https://github.com/weaselflink/talk-cors</p>
+            <img alt="qr-code" src="images/github-qr.png"/>
         </section>
     </div>
 </div>
