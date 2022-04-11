@@ -55,7 +55,7 @@
             <p class="author">Stefan Bissell</p>
         </section>
         <section>
-            <p>Ever seen this?</p>
+            <h4>Ever seen this?</h4>
             <img style="width: 200%" src="images/cors-browser-error.png">
         </section>
         <section>
@@ -70,7 +70,7 @@
             <img src="images/cors-1.svg"/>
         </section>
         <section>
-            <p>Some use cases:</p>
+            <h4>Some use cases:</h4>
             <ul>
                 <li>images from CDN</li>
                 <li>separate frontend/backend</li>
@@ -79,6 +79,108 @@
         </section>
         <section data-background="images/Old street in Prague.jpg" data-background-opacity="0.6">
             <h3>Why is CORS evil?</h3>
+        </section>
+        <section>
+            <h4>The fetch command has some interesting parameters.</h4>
+            <pre><code class="javascript" data-trim>
+            fetch(url, {
+                credentials: 'include', // <---
+                method: 'post',
+                headers: headers,
+                body: JSON.stringify(body)
+            }).then(response => {/* do work */});
+            </code></pre>
+        </section>
+        <section>
+            <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/fetch">mdn web docs</a></p>
+            <p><code>credentials</code> Controls what browsers do with credentials (cookies,
+                HTTP authentication entries, and TLS client certificates).</p>
+        </section>
+        <section>
+            <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/fetch">mdn web docs</a></p>
+            <p><code>include</code> Tells browsers to include credentials in both same- and cross-origin requests,
+                and always use any credentials sent back in responses.</p>
+        </section>
+        <section>
+            <h4>What's the attack scenario?</h4>
+            <ul>
+                <li>User logs in on <code>www.secure-pa.ge</code></li>
+                <li><code>www.secure-pa.ge</code> sets a cookie containing a token</li>
+                <li>Later user visits <code>www.evil-pa.ge</code></li>
+                <li>A script on <code>www.evil-pa.ge</code> performs a fetch to
+                    <code>www.secure-pa.ge</code> with credentials</li>
+            </ul>
+        </section>
+        <section data-background="images/Rusty spanner.jpg" data-background-opacity="0.6">
+            <h3>How do we fix this?</h3>
+        </section>
+        <section>
+            <h4>Why allow CORS at all then?</h4>
+            <p>Any request that contains no state information (cookies, headers) should never
+                have access to restricted resources.</p>
+            <p>So they should be safe to use.</p>
+        </section>
+        <section>
+            <h4>What if the request uses credentials?</h4>
+            <p>Ask the target of the request if this is OK.</p>
+            <p>This is done via
+                <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">preflighted requests</a>.</p>
+        </section>
+        <section>
+            <h4>Preflighted requests</h4>
+            <p>Inform the target (<code>www.secure-pa.ge</code>)
+                about a pending CORS request:</p>
+            <pre><code data-trim>
+                OPTIONS /secure-resource
+                Origin: https://www.evil-pa.ge
+                Access-Control-Request-Method: POST
+                Access-Control-Request-Headers: Authorization
+            </code></pre>
+        </section>
+        <section>
+            <h4>Preflighted requests</h4>
+            <p>Wait for <code>www.secure-pa.ge</code> to respond.</p>
+            <p><code>204 No content</code> means: OK go ahead.</p>
+            <p>Otherwise abort the request.</p>
+        </section>
+        <section>
+            <h4>Who enforces this behavior?</h4>
+            <p>This is all done by the browser for each
+                HTTP request performed in Javascript.</p>
+        </section>
+        <section data-background="images/pexels-brett-sayles-4508751.jpg" data-background-opacity="0.6">
+            <h3>What to do on the backend?</h3>
+        </section>
+        <section>
+            <h4>Scenario</h4>
+            <ul>
+                <li>Single page frontend (e.g. React)</li>
+                <li>Frontend calls backend servers via REST</li>
+            </ul>
+        </section>
+        <section>
+            <h4>Method 1: Avoid CORS</h4>
+            <ul>
+                <li>Host everything on single domain</li>
+                <li>Route calls to frontend or backend</li>
+                <li>Maybe prefix all backend call with <code>/api</code></li>
+            </ul>
+        </section>
+        <section>
+            <h4>Method 2: Central CORS handling</h4>
+            <ul>
+                <li>Host backend on single domain</li>
+                <li>Route calls to backend servers (API gateway)</li>
+                <li>Let the API gateway handle CORS</li>
+                <li>(preflighted requests do not reach servers)</li>
+            </ul>
+        </section>
+        <section>
+            <h4>Method 3: Backend servers handle CORS</h4>
+            <ul>
+                <li>Let preflighted requests reach the servers</li>
+                <li>Handle CORS via some server framework<br> (e.g. Spring Security)</li>
+            </ul>
         </section>
     </div>
 </div>
